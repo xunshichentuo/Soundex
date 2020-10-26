@@ -17,7 +17,7 @@ TEST(SoundexEncoding, RetainsSoleLetterOfOnLetter)
 {
     Soundex soundex;
     auto encoded = soundex.encoding("A");
-    ASSERT_EQ(encoded, QString("A"));
+    ASSERT_EQ(encoded, QString("A000"));
 }
 
 TEST(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
