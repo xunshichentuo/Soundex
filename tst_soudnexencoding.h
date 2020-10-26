@@ -9,7 +9,7 @@ using namespace testing;
 class Soundex {
 public:
     QString encoding(const QString &word) const {
-        return word;
+        return word + "000";
     }
 };
 
