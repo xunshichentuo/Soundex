@@ -8,8 +8,8 @@ using namespace testing;
 
 class Soundex {
 public:
-    QString encoding(QString word) {
-        return "";
+    QString encoding(const QString word) const {
+        return word;
     }
 };
 
