@@ -8,13 +8,14 @@ using namespace testing;
 
 class Soundex {
 public:
-    QString encoding(const QString word) const {
+    QString encoding(const QString &word) const {
         return word;
     }
 };
 
-TEST(SoudnexEncoding, RetainsSoleLetterOfOnLetter)
+TEST(SoundexEncoding, RetainsSoleLetterOfOnLetter)
 {
     Soundex soundex;
-    ASSERT_EQ(soundex.encoding("A"), QString("A"));
+    auto encoded = soundex.encoding("A");
+    ASSERT_EQ(encoded, QString("A"));
 }
