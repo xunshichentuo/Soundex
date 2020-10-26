@@ -18,16 +18,19 @@ private:
     }
 };
 
-TEST(SoundexEncoding, RetainsSoleLetterOfOnLetter)
-{
+class SoundexEncoding : public Test {
+public:
     Soundex soundex;
+};
+
+TEST_F(SoundexEncoding, RetainsSoleLetterOfOnLetter)
+{
     auto encoded = soundex.encoding("A");
     ASSERT_EQ(encoded, QString("A000"));
 }
 
-TEST(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
+TEST_F(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
 {
-    Soundex soundex;
     auto encoded = soundex.encoding("I");
     ASSERT_EQ(encoded, QString("I000"));
 }
