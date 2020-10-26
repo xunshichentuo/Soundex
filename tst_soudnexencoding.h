@@ -9,6 +9,11 @@ using namespace testing;
 class Soundex {
 public:
     QString encoding(const QString &word) const {
+        return zeroPad(word);
+    }
+
+private:
+    QString zeroPad(const QString &word) const {
         return word + "000";
     }
 };
