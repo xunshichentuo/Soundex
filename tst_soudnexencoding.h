@@ -19,3 +19,10 @@ TEST(SoundexEncoding, RetainsSoleLetterOfOnLetter)
     auto encoded = soundex.encoding("A");
     ASSERT_EQ(encoded, QString("A"));
 }
+
+TEST(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
+{
+    Soundex soundex;
+    auto encoded = soundex.encoding("I");
+    ASSERT_EQ(encoded, QString("I000"));
+}
