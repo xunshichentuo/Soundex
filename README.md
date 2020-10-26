@@ -1,5 +1,6 @@
 # soundex
 
+## chinese
 1. 保留第一个字母。丢掉所有出现的a、e、i、o、 u、y、h、w。
 2. 以数字来代替辅音（第一个字母除外）：
 * b、f、p、v : 1
@@ -13,6 +14,7 @@
 于第一个字母。
 4. 当得到一个字母和三个数字时，停止处理。如果需要，补零以对齐。
 
+## English
 1. Retain the first letter. Drop all other occurrences of a, e, i, o, u, y, h, w.
 2. Replace consonants with digits (after the first letter):
 * b, f, p, v: 1
