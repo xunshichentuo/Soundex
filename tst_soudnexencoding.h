@@ -6,6 +6,13 @@
 
 using namespace testing;
 
+QT_BEGIN_NAMESPACE
+inline void PrintTo(const QString &qStringSupport, ::std::ostream *resultShow)
+{
+    *resultShow << qUtf8Printable(qStringSupport);
+}
+QT_END_NAMESPACE
+
 class Soundex {
 public:
     QString encoding(const QString &word) const {
@@ -37,5 +44,5 @@ TEST_F(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
 
 TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
 {
-    ASSERT_THAT(soundex.encoding("Ab"), Eq("A100"));
+    ASSERT_THAT(soundex.encoding("Ab"), Eq(QString("A100")));
 }
