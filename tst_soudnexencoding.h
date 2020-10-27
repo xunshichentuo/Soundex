@@ -16,13 +16,16 @@ QT_END_NAMESPACE
 class Soundex {
 public:
     QString encoding(const QString &word) const {
-        if(word == "Ab") return "A100";
-        return zeroPad(word);
+        QString encoded = word.left(1);
+        if(word.length() > 1)
+            encoded += "1";
+        return zeroPad(encoded);
     }
 
 private:
     QString zeroPad(const QString &word) const {
-        return word + "000";
+        auto zeroNeeded =  4 - word.length();
+        return word + QString(zeroNeeded, '0');
     }
 };
 
