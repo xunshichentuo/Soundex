@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include <QObject>
+#include <QMap>
 
 using namespace testing;
 
@@ -38,8 +39,16 @@ private:
     }
 
     QString encodingDigit(QChar letter) const {
-        if(letter == 'c') return "2";
-        return "1";
+        const QMap<QChar, QString> encodings {
+            {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"},
+            {'c', "2"}, {'g', "2"}, {'j', "2"}, {'k', "2"}, {'q', "2"},
+                        {'s', "2"}, {'x', "2"}, {'z', "2"},
+            {'d', "3"}, {'t', "3"},
+            {'l', "4"},
+            {'m', "5"}, {'n', "5"},
+            {'r', "6"},
+        };
+        return encodings.find(letter).value();
     }
 };
 
@@ -67,6 +76,5 @@ TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
 
 TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits)
 {
-    EXPECT_THAT(soundex.encode("Ab"), Eq("A100"));
-    EXPECT_THAT(soundex.encode("Ac"), Eq("A200"));
+    ASSERT_THAT(soundex.encode("Ax"), Eq("A200"));
 }
