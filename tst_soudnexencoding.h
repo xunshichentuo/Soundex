@@ -32,12 +32,13 @@ private:
     }
 
     QString encodeDigits(const QString &word) const {
-        if(word.length() > 1) return encodingDigit();
+        if(word.length() > 1) return encodingDigit(word.at(1));
 
         return "";
     }
 
-    QString encodingDigit() const {
+    QString encodingDigit(QChar letter) const {
+        if(letter == 'c') return "2";
         return "1";
     }
 };
