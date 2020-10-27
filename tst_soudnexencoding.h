@@ -34,3 +34,8 @@ TEST_F(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
     auto encoded = soundex.encoding("I");
     ASSERT_EQ(encoded, QString("I000"));
 }
+
+TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
+{
+    ASSERT_THAT(soundex.encoding("Ab"), Eq("A100"));
+}
