@@ -15,7 +15,7 @@ QT_END_NAMESPACE
 
 class Soundex {
 public:
-    QString encoding(const QString &word) const {
+    QString encode(const QString &word) const {
         return zeroPad(head(word) + encodeDigits(word));
     }
 
@@ -49,17 +49,23 @@ public:
 
 TEST_F(SoundexEncoding, RetainsSoleLetterOfOnLetter)
 {
-    auto encoded = soundex.encoding("A");
+    auto encoded = soundex.encode("A");
     ASSERT_EQ(encoded, QString("A000"));
 }
 
 TEST_F(SoundexEncoding, PadsWithZeroToEnsureThreeDigits)
 {
-    auto encoded = soundex.encoding("I");
+    auto encoded = soundex.encode("I");
     ASSERT_EQ(encoded, QString("I000"));
 }
 
 TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
 {
-    ASSERT_THAT(soundex.encoding("Ab"), Eq(QString("A100")));
+    ASSERT_THAT(soundex.encode("Ab"), Eq(QString("A100")));
+}
+
+TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits)
+{
+    EXPECT_THAT(soundex.encode("Ab"), Eq("A100"));
+    EXPECT_THAT(soundex.encode("Ac"), Eq("A200"));
 }
