@@ -7,7 +7,8 @@ CONFIG += thread
 CONFIG += qt
 
 HEADERS += \
-        tst_soudnexencoding.h
+        tst_soudnexencoding.h \
+    soundex.h
 
 SOURCES += \
         main.cpp
