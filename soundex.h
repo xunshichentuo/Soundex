@@ -30,7 +30,10 @@ private:
         if(word.isEmpty())  return "";
 
         QString encoding;
-        for(auto letter : word) encoding += encodedDigit(letter);
+        for(auto letter : word) {
+            if (encoding.length() == MaxCodeLength - 1) break;
+            encoding += encodedDigit(letter);
+        }
         return encoding;
     }
 
