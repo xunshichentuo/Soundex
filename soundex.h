@@ -7,7 +7,7 @@
 class Soundex {
 public:
     QString encode(const QString &word) const {
-        return zeroPad(head(word) + encodeDigits(word));
+        return zeroPad(head(word) + encodedDigits(tail(word)));
     }
 
 private:
@@ -22,13 +22,19 @@ private:
         return word.left(1);
     }
 
-    QString encodeDigits(const QString &word) const {
-        if(word.length() > 1) return encodingDigit(word.at(1));
-
-        return "";
+    QString tail(const QString &word) const {
+        return word.mid(1);
     }
 
-    QString encodingDigit(QChar letter) const {
+    QString encodedDigits(const QString &word) const {
+        if(word.isEmpty())  return "";
+
+        QString encoding;
+        for(auto letter : word) encoding += encodedDigit(letter);
+        return encoding;
+    }
+
+    QString encodedDigit(QChar letter) const {
         const QMap<QChar, QString> encodings {
             {'b', "1"}, {'f', "1"}, {'p', "1"}, {'v', "1"},
             {'c', "2"}, {'g', "2"}, {'j', "2"}, {'k', "2"}, {'q', "2"},
@@ -38,7 +44,8 @@ private:
             {'m', "5"}, {'n', "5"},
             {'r', "6"},
         };
-        return encodings.find(letter).value();
+        auto it = encodings.find(letter);
+        return it == encodings.end() ? "" : it.value();
     }
 };
 
