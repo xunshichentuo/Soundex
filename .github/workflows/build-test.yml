@@ -9,7 +9,15 @@ jobs:
         check-bats-version:
                 runs-on: qt-docker
                 steps:
-                        - uses: actions/checkout@v4
-                        - run: mkdir -p ~/build-test
-                        - run: 
+                        - name: Checkout code 
+                          uses: actions/checkout@v4
+                        - name: Create build directory
+                          run: |
+                                  mkdir build-test
+                                  cd build-test
+                        - name: Qmake the code
+                          run: /opt/qt-everywhere-src-5.11.3/bin/qmake ${{ github.workspace }}/Soundex.pro -spec my-linux-arm-qt
+
+                        - name: Build the code
+                          run: make -j4
 
