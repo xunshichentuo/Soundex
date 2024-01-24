@@ -2,11 +2,7 @@ name: pull_request_to_main
 run-name: test pull request code by ${{ github.actor }} 
 on: [push]
 jobs:
-
         create-build-directory:
-                runs-on: qt-docker
-                steps:
-        check-bats-version:
                 runs-on: qt-docker
                 steps:
                         - name: Checkout code 
