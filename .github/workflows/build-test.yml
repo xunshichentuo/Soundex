@@ -1,0 +1,21 @@
+name: pull_request_to_main
+run-name: test pull request code by ${{ github.actor }} 
+on: [push]
+jobs:
+        create-build-directory:
+                runs-on: qt-docker
+                steps:
+                        - name: Checkout code 
+                          uses: actions/checkout@v3
+                          with:
+                                  submodules: recursive
+                        - name: Create build directory
+                          run: |
+                                  mkdir build-test
+                                  cd build-test
+                        - name: Qmake the code
+                          run: /opt/qt-everywhere-src-5.11.3/bin/qmake ${{ github.workspace }}/Soundex.pro -spec my-linux-arm-qt
+
+                        - name: Build the code
+                          run: make -j4
+
